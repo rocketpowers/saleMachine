@@ -1,18 +1,13 @@
 package machinePackeges.model;
 
-import java.util.List;
-
+import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.persistence.OneToMany;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.Data;
 
-@Getter
-@Setter
-@NoArgsConstructor
+@Entity
+@Data
 public class Machine {
 
 	@Id
@@ -21,17 +16,6 @@ public class Machine {
 
 	private String name;
 	
-	@OneToMany
-	private List<Slots> slots;
-	
+	//private List<Slots> slots;
 
-	// @Column(nullable = false, unique = true)
-	// private String code;
-
-	// @Column(nullable = false)
-	// private String name;
-
-	// on/off
-	// @Column(nullable = false)
-	// private Boolean active = true;
 }
