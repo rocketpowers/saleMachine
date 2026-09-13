@@ -18,4 +18,20 @@ public class SlotsService {
 		return slotsRepository.findAll();
 	}
 
+	public Slots saveSlot(Slots slots) {
+		return slotsRepository.save(slots);
+	}
+
+	// public void deleteSlot(Long id) {
+	// slotsRepository.deleteById(id);
+
+	public String deleteSlot(Long id) {
+		slotsRepository.deleteById(id);
+		return "successfully deleted";
+	}
+	
+	public Slots updateSlots(Slots slots) {
+		return slotsRepository.save(slots);
+	}
+
 }
