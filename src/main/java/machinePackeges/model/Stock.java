@@ -1,12 +1,9 @@
 package machinePackeges.model;
 
-import java.util.List;
-
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.persistence.OneToMany;
 import lombok.Data;
 
 @Entity
@@ -18,9 +15,7 @@ public class Stock {
 	private Long id;
 
 	private int quantity;
+	private int slot;
 
-	// adc pro
-	@OneToMany(mappedBy = "stock")
-	private List<Product> product;
-
+	
 }

@@ -1,48 +1,67 @@
 package machinePackeges.service;
 
+
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.PathVariable;
 
 import machinePackeges.model.Stock;
-import machinePackeges.repositorie.SlotsRepository;
 import machinePackeges.repositorie.StockRepository;
+
 
 @Service
 public class StockService {
 
-	
+    @Autowired
+    private StockRepository stockRepository;
 
-	@Autowired
-	private StockRepository stockRepository;
+    public List<Stock> getStocks() {
+        return stockRepository.findAll();
+    }
 
-	StockService(StockRepository stockRepository) {
-		
-		this.stockRepository=stockRepository;
-	}
+    public Stock saveStock(Stock stock) {
+        return stockRepository.save(stock);
+    }
 
-	public List<Stock> getStocks() {
-		return stockRepository.findAll();
-	}
+    public Stock updateStock(Stock stock) {
+        return stockRepository.save(stock);
+    }
 
-	public Stock saveStock(Stock stock) {
-		return stockRepository.save(stock);
+    public void deleteStock(Long id) {
+        stockRepository.deleteById(id);
+    }
 
-	}
+    public boolean hasStock(int slot) {
+        Optional<Stock> stock = stockRepository.findBySlot(slot);
 
-	public Stock updateStock(Stock stock) {
-		return stockRepository.save(stock);
+        if (stock.isPresent()) {
+            return stock.get().getQuantity() > 0;
+        }
 
-	}
+        return false;
+    }
 
-	//public String deleteStock(Long id) {
-		//stockRepository.deleteById(id);
-		//return "successfully deleted";
-		
-		public void deleteStock(Long id) {
-		    stockRepository.deleteById(id);
-		
-	}
+    public boolean sellOne(int slot) {
+        Stock stock = stockRepository.findBySlot(slot).orElse(null);
 
+        if (stock == null || stock.getQuantity() <= 0) {
+            return false;
+        }
+
+        stock.setQuantity(stock.getQuantity() - 1);
+        stockRepository.save(stock);
+
+        return true;
+    }
 }
+
+
+    
+    
+    
+   
+   

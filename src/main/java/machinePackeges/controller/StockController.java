@@ -51,4 +51,15 @@ public class StockController {
 
 	}
 
+	@PostMapping("/sell/{slot}")
+	public ResponseEntity<String> sellOne(@PathVariable int slot) {
+
+		if (stockService.sellOne(slot)) {
+			return ResponseEntity.ok(" sale sucessful ");
+
+		}
+		return ResponseEntity.badRequest().body(" product unavailable ");
+
+	}
+
 }
